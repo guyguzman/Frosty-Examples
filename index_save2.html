@@ -82,8 +82,8 @@
 
             <div style="display:flex;flex-direction:column">
 
-                <div style="clip-path:url(#clipThisIsBold);backdrop-filter:blur(5px)">
-                    <svg viewBox="0 0 100 11.84165" width="80vw" fill="#ffffff" fill-opacity=".6">
+                <div id="divThisIsBold" style="clip-path:url(#clipThisIsBold);backdrop-filter:blur(5px)">
+                    <svg id="svgThisIsBold" viewBox="0 0 100 11.84165" width="80vw" fill="#ffffff" fill-opacity=".6">
                         <defs>
                             <clipPath id="clipThisIsBold" clipPathUnits="objectBoundingBox"
                                 transform="scale(0.01 0.08444769)">
@@ -101,7 +101,7 @@
                             </clipPath>
                         </defs>
                         <g>
-                            <path
+                            <path id="pathThisIsBold"
                                 d="M3.16623,3.16676H0V.26947H9.81482V3.16676h-3.1657V11.57219H3.16623V3.16676Z 
                                 M10.14582,.26947h3.4829v3.92635h3.26118V.26947h3.48237V11.57219h-3.48237V7.09205h-3.26118v4.48014h-3.4829V.26947Z 
                                 M21.20931,.26947h3.4829V11.57219h-3.4829V.26947Z 
@@ -116,10 +116,10 @@
                     </svg>
                 </div>
 
-                <div style="clip-path:url(#guyguzmanClip);backdrop-filter:blur(5px);margin-top:100px;">
-                    <svg viewBox="0 0 100 10.92033" width="80vw" fill="#ffffff" fill-opacity=".6">
+                <div style="clip-path:url(#clipGuyGuzmanClip);backdrop-filter:blur(5px);margin-top:100px;">
+                    <svg id="svgGuyGuzman" viewBox="0 0 100 10.92033" width="80vw" fill="#ffffff" fill-opacity=".6">
                         <defs>
-                            <clipPath id="guyguzmanClip" clipPathUnits="objectBoundingBox">
+                            <clipPath id="clipGuyGuzmanClip" clipPathUnits="objectBoundingBox">
                                 <path d=" M0.079,0.88 c-0.007,0.084,-0.018,0.12,-0.03,0.12 C0.019,1,0,0.781,0,0.509
                 C0,0.146,0.028,0,0.051,0 c0.027,0,0.043,0.132,0.048,0.357 h-0.031
                 c-0.001,-0.069,-0.008,-0.119,-0.015,-0.119 c-0.022,0,-0.021,0.213,-0.021,0.278
@@ -141,7 +141,7 @@
                             </clipPath>
                         </defs>
                         <g>
-                            <path
+                            <path id="pathGuyGuzman"
                                 d="
                 M7.94175,9.60641c-.71517,.91965-1.82462,1.31392-2.96342,1.31392C1.898,10.92033,0,8.52533,0,5.5624,0,1.59128,2.78878,0,5.13878,0c2.6572,0,4.33604,1.44551,4.80321,3.89774h-3.08033c-.11691-.75871-.7592-1.29925-1.5184-1.29925-2.20422,0-2.13133,2.32162-2.13133,3.0368,0,.97835,.39427,2.68655,2.35048,2.68655,.74452,0,1.50372-.3796,1.66417-1.15347h-1.41616v-2.23406h4.26316v5.73753h-2.02959l-.10224-1.06542Z
                 M20.24694,6.64299c0,2.89004-1.56193,4.27734-4.7445,4.27734s-4.75918-1.3873-4.75918-4.27734V.2485h3.21143V5.92684c0,1.0664,0,2.395,1.56193,2.395,1.5184,0,1.5184-1.3286,1.5184-2.395V.2485h3.21192V6.64299Z
@@ -155,6 +155,41 @@
                         </g>
                     </svg>
                 </div>
+
+                <div style="display:flex;flex-wrap: wrap;gap:20px;margin-top:100px;">
+
+
+
+                    <div id="divDarkRedCircle" style="clip-path:url(#clipDarkRedCircle);backdrop-filter:blur(5px)">
+                        <svg id="svgDarkRedCircle" viewBox="0 0 200 200" width="20vw">
+                            <defs>
+                                <clipPath id="clipDarkRedCircle" clipPathUnits="objectBoundingBox"
+                                    transform="scale(0.005 0.005)">
+                                    <path d="M0,100a100,100 0 1,0 200,0a100,100 0 1,0 -200,0"></path>
+                                </clipPath>
+                            </defs>
+                            <path id="pathDarkRedCircle" fill-opacity=".5" fill="#982c00"
+                                d="M0,100a100,100 0 1,0 200,0a100,100 0 1,0 -200,0">
+                            </path>
+                        </svg>
+                    </div>
+
+                    <svg width="200" height="200" style="backdrop-filter:blur(10px)" clip-path="url(#whitecircle" )>
+                        <defs>
+                            <clipPath id="whitecircle">
+                                <circle cx="100" cy="100" r="100"></circle>
+                            </clipPath>
+                        </defs>
+                        <g fill="#ffffff" fill-opacity=".5">
+                            <circle cx="100" cy="100" r="100"></circle>
+                        </g>
+                    </svg>
+
+                    <div style="clip-path:url(#whitecircle);backdrop-filter:blur(10px);">
+                        <image src="/redcircle.svg" height="200px" width="200px">
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -169,41 +204,19 @@
 
         console.log(this);
 
-        // $.getJSON(" https://ipinfo.io?token=dd17c16d21d2c4 ", function(response) {
-        //     console.log(response);
-        // });
-
-        const boldRed = document.getElementById("boldRed");
-        console.log(boldRed);
-        var bbox = boldRed.getBBox();
-        console.log(bbox);
+        $.getJSON(" https://ipinfo.io?token=dd17c16d21d2c4 ", function(response) {
+            console.log(response);
+        });
 
         return;
+        const currentSVG = document.getElementById("svgDarkRedCircle");
+        console.log(currentSVG);
+        var bbox = currentSVG.getBBox();
+        console.log(bbox);
+        const viewbox = `${bbox.x} ${bbox.y} ${bbox.width - bbox.x} ${bbox.height - bbox.y}`;
+        currentSVG.setAttribute('viewBox', viewbox);
+        console.log("--------------------------------")
 
-        const {
-            xMin,
-            xMax,
-            yMin,
-            yMax
-        } = [...boldRed.children].reduce((acc, el) => {
-            const {
-                x,
-                y,
-                width,
-                height
-            } = el.getBBox();
-            if (!acc.xMin || x < acc.xMin) acc.xMin = x;
-            if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
-            if (!acc.yMin || y < acc.yMin) acc.yMin = y;
-            if (!acc.yMax || y + height > acc.yMax) acc.yMax = y + height;
-            return acc;
-        }, {});
-
-        const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
-
-        console.log(viewBox);
-
-        svg.setAttribute('viewBox', viewbox);
     });
 </script>
 
