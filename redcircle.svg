@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="clippath">
+            <circle cx="100" cy="100" r="100"></circle>
+        </clipPath>
+    </defs>
+    <circle fill="#ff0000" cx="100" cy="100" r="100" fill-opacity=".5"></circle>
+</svg>
