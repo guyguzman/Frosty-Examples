@@ -145,23 +145,40 @@
                     </g>
                 </svg>
             </div>
-        </div>
 
+            <div style="display:flex;margin-top:100px;">
+                <div>
+                    <svg id="svgBlog" width="20vw">
+                        <defs>
+                            <clipPath id="clipPathBlog">
+                                <path
+                                    d="M225.4 -214C300.4 -150.4 375.2 -75.2 384 8.8C392.9 92.9 335.7 185.7 260.7 255.2C185.7 324.7 92.9 370.9 19.9 351C-53 331 -106.1 245.1 -176.1 175.6C-246.1 106.1 -333 53 -333.6 -0.6C-334.2 -54.2 -248.4 -108.4 -178.4 -172.1C-108.4 -235.8 -54.2 -308.9 10.5 -319.4C75.2 -329.9 150.4 -277.7 225.4 -214" />
+                            </clipPath>
+                        </defs>
+                        <path fill="#FF0066"
+                            d="M225.4 -214C300.4 -150.4 375.2 -75.2 384 8.8C392.9 92.9 335.7 185.7 260.7 255.2C185.7 324.7 92.9 370.9 19.9 351C-53 331 -106.1 245.1 -176.1 175.6C-246.1 106.1 -333 53 -333.6 -0.6C-334.2 -54.2 -248.4 -108.4 -178.4 -172.1C-108.4 -235.8 -54.2 -308.9 10.5 -319.4C75.2 -329.9 150.4 -277.7 225.4 -214" />
+                    </svg>
+                </div>
+
+                <div>
+                    <svg id="svgBlogBlur" width="20vw">
+                        <defs>
+                            <clipPath id="clipPathBlogBlur">
+                                <path
+                                    d="M225.4 -214C300.4 -150.4 375.2 -75.2 384 8.8C392.9 92.9 335.7 185.7 260.7 255.2C185.7 324.7 92.9 370.9 19.9 351C-53 331 -106.1 245.1 -176.1 175.6C-246.1 106.1 -333 53 -333.6 -0.6C-334.2 -54.2 -248.4 -108.4 -178.4 -172.1C-108.4 -235.8 -54.2 -308.9 10.5 -319.4C75.2 -329.9 150.4 -277.7 225.4 -214" />
+                            </clipPath>
+                        </defs>
+                        <path fill="#00e189" fill-opacity=".6"
+                            d="M225.4 -214C300.4 -150.4 375.2 -75.2 384 8.8C392.9 92.9 335.7 185.7 260.7 255.2C185.7 324.7 92.9 370.9 19.9 351C-53 331 -106.1 245.1 -176.1 175.6C-246.1 106.1 -333 53 -333.6 -0.6C-334.2 -54.2 -248.4 -108.4 -178.4 -172.1C-108.4 -235.8 -54.2 -308.9 10.5 -319.4C75.2 -329.9 150.4 -277.7 225.4 -214" />
+                    </svg>
+                </div>
+            </div>
+
+
+        </div>
 
         <div style="display:flex;flex-wrap: wrap;gap:20px;margin-top:100px;">
 
-            <div id="divDarkRedCircle" style="clip-path:url(#clipDarkRedCircle);backdrop-filter:blur(5px)">
-                <svg id="svgDarkRedCircle" width="10vw">
-                    <defs>
-                        <clipPath id="clipDarkRedCircle" clipPathUnits="objectBoundingBox" transform="scale(0.01 0.01)">
-                            <path d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0"></path>
-                        </clipPath>
-                    </defs>
-                    <path id="pathDarkRedCircle" fill-opacity=".5" fill="#982c00"
-                        d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0">
-                    </path>
-                </svg>
-            </div>
             <svg width="200" height="200" style="backdrop-filter:blur(10px)" clip-path="url(#whitecircle" )>
                 <defs>
                     <clipPath id="whitecircle">
@@ -196,18 +213,20 @@
             console.log(response);
         });
 
-        setViewBox("svgThisIsBold");
-        setClipPathScale("svgThisIsBold", "clipThisIsBold");
+        //setViewBox("blob");
+        setViewBoxClipPathScale("svgThisIsBold", "clipThisIsBold");
+        setViewBoxClipPathScale("svgBlog", "clipPathBlog");
+        setViewBoxClipPathScale("svgBlogBlur", "clipPathBlogBlur");
+
 
     });
 
-    function setClipPathScale(svgId, clipPathId) {
-        console.log("========setViewBox===========");
+    function setViewBoxClipPathScale(svgId, clipPathId) {
+
         const currentSVG = document.getElementById(svgId);
         const currentClipPath = document.getElementById(clipPathId);
-        console.log(currentSVG);
+
         var bbox = currentSVG.getBBox();
-        console.log(bbox);
         var x = bbox.x;
         var y = bbox.y;
         var width = bbox.width;
@@ -216,38 +235,36 @@
         var absY = Math.abs(y);
         var scaleX = 1 / width;
         var scaleY = 1 / height;
-
-        console.log(absX + " " + absY)
         if (absX < .000001) x = 0;
         if (absY < .000001) y = 0;
-        console.log(x + " " + y)
+
         const viewbox = `${x} ${y} ${width - x} ${height - y}`;
         const scale = `scale(${scaleX} ${scaleY})`;
-        console.log(scale);
+
+        currentSVG.setAttribute('viewBox', viewbox);
         currentClipPath.setAttribute('transform', scale);
-        console.log("--------------------------------")
+
     }
 
     function setViewBox(svgId) {
-        console.log("========setViewBox===========");
+
         const currentSVG = document.getElementById(svgId);
-        console.log(currentSVG);
+
         var bbox = currentSVG.getBBox();
-        console.log(bbox);
         var x = bbox.x;
         var y = bbox.y;
         var width = bbox.width;
         var height = bbox.height;
         var absX = Math.abs(x);
         var absY = Math.abs(y);
-        console.log(absX + " " + absY)
+
         if (absX < .000001) x = 0;
         if (absY < .000001) y = 0;
-        console.log(x + " " + y)
+
         const viewbox = `${x} ${y} ${width - x} ${height - y}`;
-        console.log(viewbox);
+
         currentSVG.setAttribute('viewBox', viewbox);
-        console.log("--------------------------------")
+
     }
 </script>
 
