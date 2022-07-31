@@ -74,10 +74,9 @@
     <div class="container">
         <div>
             <div id="divThisIsBold" style="clip-path:url(#clipThisIsBold);backdrop-filter:blur(5px)">
-                <svg id="svgThisIsBold" viewBox="0 0 100 11.84165" width="80vw" fill="#ffffff" fill-opacity=".6">
+                <svg id="svgThisIsBold" width="80vw" fill="#ffffff" fill-opacity=".6">
                     <defs>
-                        <clipPath id="clipThisIsBold" clipPathUnits="objectBoundingBox"
-                            transform="scale(0.01 0.08444769)">
+                        <clipPath id="clipThisIsBold" clipPathUnits="objectBoundingBox">
                             <path
                                 d="M3.16623,3.16676H0V.26947H9.81482V3.16676h-3.1657V11.57219H3.16623V3.16676Z 
                                 M10.14582,.26947h3.4829v3.92635h3.26118V.26947h3.48237V11.57219h-3.48237V7.09205h-3.26118v4.48014h-3.4829V.26947Z 
@@ -197,16 +196,59 @@
             console.log(response);
         });
 
+        setViewBox("svgThisIsBold");
+        setClipPathScale("svgThisIsBold", "clipThisIsBold");
 
-        const currentSVG = document.getElementById("svgDarkRedCircle");
+    });
+
+    function setClipPathScale(svgId, clipPathId) {
+        console.log("========setViewBox===========");
+        const currentSVG = document.getElementById(svgId);
+        const currentClipPath = document.getElementById(clipPathId);
         console.log(currentSVG);
         var bbox = currentSVG.getBBox();
         console.log(bbox);
-        const viewbox = `${bbox.x} ${bbox.y} ${bbox.width - bbox.x} ${bbox.height - bbox.y}`;
+        var x = bbox.x;
+        var y = bbox.y;
+        var width = bbox.width;
+        var height = bbox.height;
+        var absX = Math.abs(x);
+        var absY = Math.abs(y);
+        var scaleX = 1 / width;
+        var scaleY = 1 / height;
+
+        console.log(absX + " " + absY)
+        if (absX < .000001) x = 0;
+        if (absY < .000001) y = 0;
+        console.log(x + " " + y)
+        const viewbox = `${x} ${y} ${width - x} ${height - y}`;
+        const scale = `scale(${scaleX} ${scaleY})`;
+        console.log(scale);
+        currentClipPath.setAttribute('transform', scale);
+        console.log("--------------------------------")
+    }
+
+    function setViewBox(svgId) {
+        console.log("========setViewBox===========");
+        const currentSVG = document.getElementById(svgId);
+        console.log(currentSVG);
+        var bbox = currentSVG.getBBox();
+        console.log(bbox);
+        var x = bbox.x;
+        var y = bbox.y;
+        var width = bbox.width;
+        var height = bbox.height;
+        var absX = Math.abs(x);
+        var absY = Math.abs(y);
+        console.log(absX + " " + absY)
+        if (absX < .000001) x = 0;
+        if (absY < .000001) y = 0;
+        console.log(x + " " + y)
+        const viewbox = `${x} ${y} ${width - x} ${height - y}`;
+        console.log(viewbox);
         currentSVG.setAttribute('viewBox', viewbox);
         console.log("--------------------------------")
-
-    });
+    }
 </script>
 
 </html>
